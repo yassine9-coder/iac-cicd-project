@@ -1,6 +1,15 @@
 ---
 - name: Configure web server and deploy page
   hosts: web
+  gather_facts: false
+
+  pre_tasks:
+    - name: Bootstrap Python3 if missing
+      raw: test -e /usr/bin/python3 || (apt-get update && apt-get install -y python3)
+      changed_when: false
+
+    - name: Gather facts now that Python is present
+      setup:
 
   tasks:
     - name: Update apt cache
