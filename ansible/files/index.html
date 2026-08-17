@@ -1,763 +1,650 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Infrastructure as Code & CI/CD deployment project developed during an internship at METAL 2000.">
-
-    <title>METAL 2000 | Cloud & DevOps Infrastructure</title>
-
-    <link rel="stylesheet" href="style.css">
-
+    <title>DevOps Infrastructure & CI/CD Platform — Metal 2000 Internship</title>
+    
+    <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
-          rel="stylesheet">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <style>
+        /* ==========================================================================
+           METAL 2000 BRAND PALETTE & CORE DESIGN SYSTEM
+           ========================================================================== */
+        :root {
+            --m2k-navy-dark: #070F1E;
+            --m2k-navy: #0A192F;
+            --m2k-navy-light: #1E293B;
+            --m2k-steel: #334155;
+            --m2k-yellow: #F59E0B;
+            --m2k-yellow-hover: #D97706;
+            --m2k-yellow-glow: rgba(245, 158, 11, 0.25);
+            --m2k-accent-blue: #38BDF8;
+            --m2k-text-main: #F8FAFC;
+            --m2k-text-muted: #94A3B8;
+            --m2k-card-bg: rgba(15, 23, 42, 0.75);
+            --m2k-card-border: rgba(255, 255, 255, 0.1);
+            --m2k-radius: 12px;
+            --m2k-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Basic Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--m2k-navy-dark);
+            color: var(--m2k-text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(56, 189, 248, 0.06) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* ==========================================================================
+           HEADER & NAVIGATION
+           ========================================================================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 15, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--m2k-card-border);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-badge {
+            background: var(--m2k-yellow);
+            color: var(--m2k-navy-dark);
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 6px 12px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px var(--m2k-yellow-glow);
+        }
+
+        .brand-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--m2k-text-main);
+        }
+
+        .brand-title span {
+            font-size: 0.75rem;
+            color: var(--m2k-yellow);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10B981;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.825rem;
+            font-weight: 600;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10B981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero {
+            max-width: 1200px;
+            margin: 4rem auto 2rem;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: var(--m2k-yellow);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, #FFFFFF 30%, var(--m2k-text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h2 span {
+            background: linear-gradient(135deg, var(--m2k-yellow) 0%, #FBBF24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            max-width: 720px;
+            margin: 0 auto 2.5rem;
+            color: var(--m2k-text-muted);
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--m2k-transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--m2k-yellow);
+            color: var(--m2k-navy-dark);
+            box-shadow: 0 4px 20px var(--m2k-yellow-glow);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--m2k-yellow-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--m2k-navy-light);
+            color: var(--m2k-text-main);
+            border: 1px solid var(--m2k-card-border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--m2k-steel);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           TOOLCHAIN / PIPELINE CARDS
+           ========================================================================== */
+        .section-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--m2k-text-main);
+        }
+
+        .section-title p {
+            color: var(--m2k-text-muted);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--m2k-card-bg);
+            border: 1px solid var(--m2k-card-border);
+            border-radius: var(--m2k-radius);
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: var(--m2k-transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--m2k-yellow), transparent);
+            opacity: 0;
+            transition: var(--m2k-transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--m2k-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.6rem;
+            color: var(--m2k-text-main);
+        }
+
+        .card p {
+            color: var(--m2k-text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* ==========================================================================
+           TERMINAL INTERACTIVE DEMO
+           ========================================================================== */
+        .terminal-wrapper {
+            background: #050B14;
+            border: 1px solid var(--m2k-card-border);
+            border-radius: var(--m2k-radius);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .terminal-header {
+            background: #0B132B;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--m2k-card-border);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #EF4444; }
+        .dot-yellow { background: #F59E0B; }
+        .dot-green { background: #10B981; }
+
+        .terminal-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--m2k-text-muted);
+        }
+
+        .terminal-tabs {
+            display: flex;
+            background: rgba(10, 25, 47, 0.6);
+            border-bottom: 1px solid var(--m2k-card-border);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--m2k-text-muted);
+            padding: 10px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.825rem;
+            cursor: pointer;
+            border-right: 1px solid var(--m2k-card-border);
+            transition: var(--m2k-transition);
+        }
+
+        .tab-btn.active {
+            background: #050B14;
+            color: var(--m2k-yellow);
+            border-bottom: 2px solid var(--m2k-yellow);
+        }
+
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: #E2E8F0;
+            min-height: 220px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .t-keyword { color: #F59E0B; }
+        .t-string { color: #34D399; }
+        .t-comment { color: #64748B; italic; }
+        .t-cmd { color: #38BDF8; }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        footer {
+            margin-top: 6rem;
+            background: var(--m2k-navy-dark);
+            border-top: 1px solid var(--m2k-card-border);
+            padding: 2.5rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-weight: 800;
+            color: var(--m2k-yellow);
+            letter-spacing: 1px;
+        }
+
+        .footer-text {
+            color: var(--m2k-text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-badges {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .tech-pill {
+            background: var(--m2k-navy-light);
+            border: 1px solid var(--m2k-card-border);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--m2k-text-muted);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2.2rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
 <body>
 
-<!-- ================= NAVBAR ================= -->
-
-<nav class="navbar">
-
-    <div class="container nav-container">
-
-        <a href="#" class="logo">
-            <span class="logo-mark">M</span>
-
-            <span class="logo-text">
-                METAL <strong>2000</strong>
-            </span>
-        </a>
-
-        <div class="nav-links">
-            <a href="#about">Entreprise</a>
-            <a href="#project">Projet</a>
-            <a href="#stack">Technologies</a>
-            <a href="#pipeline">Pipeline</a>
-        </div>
-
-        <a href="#project" class="nav-button">
-            Découvrir le projet
-            <span>↗</span>
-        </a>
-
-    </div>
-
-</nav>
-
-
-<!-- ================= HERO ================= -->
-
-<header class="hero">
-
-    <div class="hero-grid"></div>
-
-    <div class="container hero-content">
-
-        <div class="hero-badge">
-            <span class="status-dot"></span>
-            PROJET DEVOPS · INTERNSHIP 2026
-        </div>
-
-        <h1>
-            Infrastructure
-            <span>automatisée.</span>
-        </h1>
-
-        <p class="hero-description">
-            Une infrastructure Cloud moderne conçue autour de
-            l'Infrastructure as Code et du CI/CD pour automatiser
-            le déploiement d'une application web.
-        </p>
-
-        <div class="hero-actions">
-
-            <a href="#pipeline" class="btn btn-primary">
-                Voir le pipeline
-                <span>→</span>
-            </a>
-
-            <a href="#project" class="btn btn-secondary">
-                Explorer le projet
-            </a>
-
-        </div>
-
-        <div class="hero-tech">
-
-            <div>
-                <span class="tech-icon">TF</span>
-                Terraform
+    <!-- Header / Brand Bar -->
+    <header>
+        <div class="brand-container">
+            <div class="brand-badge">METAL 2000</div>
+            <div class="brand-title">
+                <h1>Cloud Infrastructure</h1>
+                <span>Engineering & Automation Lab</span>
             </div>
-
-            <div>
-                <span class="tech-icon">AN</span>
-                Ansible
-            </div>
-
-            <div>
-                <span class="tech-icon">JK</span>
-                Jenkins
-            </div>
-
-            <div>
-                <span class="tech-icon">DK</span>
-                Docker
-            </div>
-
         </div>
 
-    </div>
-
-    <div class="hero-bottom">
-
-        <div class="container hero-bottom-content">
-
-            <span>METAL 2000</span>
-
-            <span class="scroll-line"></span>
-
-            <span>CLOUD ENGINEERING · DEVOPS</span>
-
+        <div class="nav-status">
+            <span class="pulse-dot"></span>
+            CI/CD Pipeline Active
         </div>
+    </header>
 
-    </div>
-
-</header>
-
-
-<!-- ================= COMPANY ================= -->
-
-<section id="about" class="section company-section">
-
-    <div class="container">
-
-        <div class="section-label">
-            <span>01</span>
-            À PROPOS
-        </div>
-
-        <div class="company-grid">
-
-            <div>
-
-                <h2>
-                    L'expertise industrielle
-                    <br>
-                    rencontre le <span>Cloud.</span>
-                </h2>
-
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-tag">
+                <i class="fa-solid fa-graduation-cap"></i>
+                Cloud Engineering Internship — 2026
             </div>
-
-            <div>
-
-                <p class="large-text">
-                    METAL 2000 développe des solutions de fermeture
-                    pour les environnements résidentiels, commerciaux
-                    et industriels.
-                </p>
-
-                <p>
-                    Cette expérience industrielle s'appuie sur la
-                    fabrication, l'installation, la maintenance,
-                    le dépannage et la réparation de systèmes
-                    de fermeture.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- Statistics -->
-
-        <div class="stats">
-
-            <div class="stat-card">
-
-                <strong>30+</strong>
-
-                <span>Années d'expertise</span>
-
-            </div>
-
-            <div class="stat-card">
-
-                <strong>2 800</strong>
-
-                <span>m² d'usine en Île-de-France</span>
-
-            </div>
-
-            <div class="stat-card">
-
-                <strong>112</strong>
-
-                <span>Agences et représentations</span>
-
-            </div>
-
-            <div class="stat-card">
-
-                <strong>24/7</strong>
-
-                <span>Service d'astreinte</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= PROJECT ================= -->
-
-<section id="project" class="section project-section">
-
-    <div class="container">
-
-        <div class="section-label">
-            <span>02</span>
-            PROJET
-        </div>
-
-        <div class="project-header">
-
-            <div>
-
-                <h2>
-                    Infrastructure as
-                    <span>Code.</span>
-                </h2>
-
-            </div>
-
-            <p>
-                L'objectif du projet est de transformer un processus
-                de déploiement manuel en une chaîne automatisée,
-                reproductible et versionnée.
-            </p>
-
-        </div>
-
-
-        <div class="project-card">
-
-            <div class="project-card-top">
-
-                <div class="terminal-dot"></div>
-                <div class="terminal-dot"></div>
-                <div class="terminal-dot"></div>
-
-                <span>deployment.sh</span>
-
-            </div>
-
-
-            <div class="terminal-content">
-
-                <div>
-                    <span class="terminal-number">01</span>
-                    <span class="terminal-command">
-                        terraform init
-                    </span>
-                </div>
-
-                <div>
-                    <span class="terminal-number">02</span>
-                    <span class="terminal-command">
-                        terraform apply
-                    </span>
-                </div>
-
-                <div>
-                    <span class="terminal-number">03</span>
-                    <span class="terminal-command">
-                        ansible-playbook playbook.yml
-                    </span>
-                </div>
-
-                <div>
-                    <span class="terminal-number">04</span>
-                    <span class="terminal-command success">
-                        ✓ deployment successful
-                    </span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= TECHNOLOGIES ================= -->
-
-<section id="stack" class="section stack-section">
-
-    <div class="container">
-
-        <div class="section-label">
-            <span>03</span>
-            TECHNOLOGIES
-        </div>
-
-        <h2>
-            Une chaîne technique
-            <span>complètement automatisée.</span>
-        </h2>
-
-
-        <div class="tech-grid">
-
-            <!-- Terraform -->
-
-            <article class="tech-card">
-
-                <div class="tech-card-number">
-                    01
-                </div>
-
-                <div class="big-icon terraform-icon">
-                    TF
-                </div>
-
-                <h3>Terraform</h3>
-
-                <p>
-                    Provisionnement de l'infrastructure
-                    sous forme de code.
-                </p>
-
-                <span class="tech-role">
-                    INFRASTRUCTURE
-                </span>
-
-            </article>
-
-
-            <!-- Ansible -->
-
-            <article class="tech-card">
-
-                <div class="tech-card-number">
-                    02
-                </div>
-
-                <div class="big-icon ansible-icon">
-                    AN
-                </div>
-
-                <h3>Ansible</h3>
-
-                <p>
-                    Configuration automatisée du serveur,
-                    installation de NGINX et déploiement.
-                </p>
-
-                <span class="tech-role">
-                    CONFIGURATION
-                </span>
-
-            </article>
-
-
-            <!-- Jenkins -->
-
-            <article class="tech-card">
-
-                <div class="tech-card-number">
-                    03
-                </div>
-
-                <div class="big-icon jenkins-icon">
-                    JK
-                </div>
-
-                <h3>Jenkins</h3>
-
-                <p>
-                    Orchestration du pipeline CI/CD
-                    déclenché par les changements Git.
-                </p>
-
-                <span class="tech-role">
-                    AUTOMATION
-                </span>
-
-            </article>
-
-
-            <!-- Docker -->
-
-            <article class="tech-card">
-
-                <div class="tech-card-number">
-                    04
-                </div>
-
-                <div class="big-icon docker-icon">
-                    DK
-                </div>
-
-                <h3>Docker</h3>
-
-                <p>
-                    Environnement conteneurisé utilisé
-                    comme cible de déploiement.
-                </p>
-
-                <span class="tech-role">
-                    CONTAINER
-                </span>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= PIPELINE ================= -->
-
-<section id="pipeline" class="section pipeline-section">
-
-    <div class="container">
-
-        <div class="section-label">
-            <span>04</span>
-            CI/CD PIPELINE
-        </div>
-
-        <div class="pipeline-header">
-
+            
             <h2>
-                From <span>commit</span>
-                to deployment.
+                Automated Deployment & <span>Infrastructure as Code</span>
             </h2>
 
-            <p>
-                Chaque modification du projet peut être
-                transformée automatiquement en déploiement.
+            <p class="hero-description">
+                Welcome to the demonstration environment for <strong>METAL 2000 Group</strong>. 
+                This web platform was provisioned and deployed via an automated DevOps workflow using 
+                <strong>Terraform</strong>, <strong>Ansible</strong>, and <strong>Jenkins</strong>.
             </p>
 
+            <div class="cta-group">
+                <button class="btn btn-primary" onclick="scrollToDemo()">
+                    <i class="fa-solid fa-code"></i> Inspect Architecture
+                </button>
+                <a href="https://www.metal2000.fr/" target="_blank" rel="noopener" class="btn btn-secondary">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> METAL 2000 Official
+                </a>
+            </div>
+        </section>
+
+        <!-- Pipeline Stack Cards -->
+        <section class="section-container">
+            <div class="section-title">
+                <h3>Automation Toolchain</h3>
+                <p>Enterprise-grade infrastructure management designed for industrial reliability.</p>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Terraform Card -->
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
+                    <h4>Terraform</h4>
+                    <p>
+                        Declarative provisioning of cloud resources, network security groups, 
+                        and virtual machine instances tailored for high-availability workloads.
+                    </p>
+                </div>
+
+                <!-- Ansible Card -->
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h4>Ansible</h4>
+                    <p>
+                        Agentless configuration management automating Nginx web server installation, 
+                        hardening Linux security policies, and environment setup.
+                    </p>
+                </div>
+
+                <!-- Jenkins Card -->
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-arrows-spin"></i>
+                    </div>
+                    <h4>Jenkins</h4>
+                    <p>
+                        Continuous Integration & Delivery orchestration triggering automated builds, 
+                        testing execution, and zero-downtime deployment pipelines.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terminal Interactive Viewer -->
+        <section class="section-container" id="architecture-demo">
+            <div class="section-title">
+                <h3>Live Code Manifests</h3>
+                <p>Preview the IaC declarative configurations driving this environment.</p>
+            </div>
+
+            <div class="terminal-wrapper">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <div class="terminal-title">metal2000-devops-runner ~ bash</div>
+                </div>
+
+                <div class="terminal-tabs">
+                    <button class="tab-btn active" onclick="switchTab('tf')">main.tf</button>
+                    <button class="tab-btn" onclick="switchTab('ansible')">playbook.yml</button>
+                    <button class="tab-btn" onclick="switchTab('jenkins')">Jenkinsfile</button>
+                </div>
+
+                <div class="terminal-body" id="terminal-content">
+                    <!-- Default JS Content populates here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">METAL 2000 GROUP</div>
+            <div class="footer-text">
+                Spécialiste de la fermeture métallique — Designed during Cloud Engineering Internship 2026
+            </div>
+            <div class="footer-badges">
+                <span class="tech-pill">Terraform v1.7+</span>
+                <span class="tech-pill">Ansible Core</span>
+                <span class="tech-pill">Jenkins CI/CD</span>
+                <span class="tech-pill">Nginx Web Server</span>
+            </div>
         </div>
-
-
-        <div class="pipeline">
-
-            <!-- GitHub -->
-
-            <div class="pipeline-step">
-
-                <div class="pipeline-icon">
-                    GIT
-                </div>
-
-                <div>
-                    <span class="pipeline-label">
-                        SOURCE
-                    </span>
-
-                    <h3>GitHub</h3>
-
-                    <p>
-                        Code versionné
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-
-            <!-- Jenkins -->
-
-            <div class="pipeline-step">
-
-                <div class="pipeline-icon">
-                    JK
-                </div>
-
-                <div>
-                    <span class="pipeline-label">
-                        CI/CD
-                    </span>
-
-                    <h3>Jenkins</h3>
-
-                    <p>
-                        Orchestration
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-
-            <!-- Terraform -->
-
-            <div class="pipeline-step">
-
-                <div class="pipeline-icon">
-                    TF
-                </div>
-
-                <div>
-                    <span class="pipeline-label">
-                        INFRA
-                    </span>
-
-                    <h3>Terraform</h3>
-
-                    <p>
-                        Provisionnement
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-
-            <!-- Ansible -->
-
-            <div class="pipeline-step">
-
-                <div class="pipeline-icon">
-                    AN
-                </div>
-
-                <div>
-                    <span class="pipeline-label">
-                        CONFIG
-                    </span>
-
-                    <h3>Ansible</h3>
-
-                    <p>
-                        Configuration
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="pipeline-arrow">
-                →
-            </div>
-
-
-            <!-- NGINX -->
-
-            <div class="pipeline-step">
-
-                <div class="pipeline-icon">
-                    NG
-                </div>
-
-                <div>
-                    <span class="pipeline-label">
-                        DEPLOY
-                    </span>
-
-                    <h3>NGINX</h3>
-
-                    <p>
-                        Application live
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="pipeline-status">
-
-            <span class="status-pulse"></span>
-
-            PIPELINE STATUS
-
-            <strong>OPERATIONAL</strong>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= QUALITY ================= -->
-
-<section class="section quality-section">
-
-    <div class="container quality-grid">
-
-        <div>
-
-            <div class="section-label">
-                <span>05</span>
-                ENGINEERING
-            </div>
-
-            <h2>
-                Built for
-                <span>reliability.</span>
-            </h2>
-
-            <p>
-                L'approche IaC permet de rendre l'infrastructure
-                reproductible et de réduire les opérations manuelles.
-            </p>
-
-        </div>
-
-
-        <div class="quality-list">
-
-            <div class="quality-item">
-
-                <span>01</span>
-
-                <div>
-                    <h3>Reproductible</h3>
-                    <p>
-                        Une infrastructure décrite et versionnée
-                        dans le code.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="quality-item">
-
-                <span>02</span>
-
-                <div>
-                    <h3>Automatisé</h3>
-                    <p>
-                        Le pipeline exécute automatiquement
-                        les différentes étapes.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="quality-item">
-
-                <span>03</span>
-
-                <div>
-                    <h3>Traçable</h3>
-                    <p>
-                        Les changements sont suivis dans Git
-                        et exécutés par Jenkins.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="quality-item">
-
-                <span>04</span>
-
-                <div>
-                    <h3>Scalable</h3>
-                    <p>
-                        L'approche peut évoluer vers des
-                        infrastructures Cloud plus importantes.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="footer-top">
-
-            <div class="footer-brand">
-
-                <div class="logo">
-                    <span class="logo-mark">M</span>
-
-                    <span class="logo-text">
-                        METAL <strong>2000</strong>
-                    </span>
-                </div>
-
-                <p>
-                    Cloud Engineering · Infrastructure · DevOps
-                </p>
-
-            </div>
-
-
-            <div class="footer-project">
-
-                <span>INTERNSHIP PROJECT</span>
-
-                <strong>
-                    Infrastructure as Code
-                    & CI/CD Automation
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            <span>
-                © 2026 METAL 2000 · Internship Project
-            </span>
-
-            <span>
-                Terraform · Ansible · Jenkins · Docker · NGINX
-            </span>
-
-        </div>
-
-    </div>
-
-</footer>
-
-
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        const codeSnippets = {
+            tf: `<span class="t-comment"># Terraform Provisioning for Metal 2000 Cloud Web Node</span>
+<span class="t-keyword">resource</span> <span class="t-string">"aws_instance"</span> <span class="t-string">"web_app"</span> {
+  ami           = <span class="t-string">"ami-0c55b159cbfafe1f0"</span> <span class="t-comment"># Ubuntu 22.04 LTS</span>
+  instance_type = <span class="t-string">"t3.micro"</span>
+
+  tags = {
+    Name        = <span class="t-string">"Metal2000-IaC-WebServer"</span>
+    Environment = <span class="t-string">"Production"</span>
+    ManagedBy   = <span class="t-string">"Terraform"</span>
+  }
+}`,
+            ansible: `<span class="t-comment">---
+# Ansible Configuration Playbook</span>
+- <span class="t-keyword">name</span>: Configure Metal 2000 Production Web Server
+  <span class="t-keyword">hosts</span>: webservers
+  <span class="t-keyword">become</span>: yes
+  <span class="t-keyword">tasks</span>:
+    - <span class="t-keyword">name</span>: Install Nginx Web Server
+      <span class="t-cmd">apt</span>:
+        name: nginx
+        state: present
+        update_cache: yes`,
+            jenkins: `<span class="t-comment">// Jenkins CI/CD Automated Pipeline</span>
+<span class="t-keyword">pipeline</span> {
+    <span class="t-keyword">agent</span> any
+    <span class="t-keyword">stages</span> {
+        <span class="t-keyword">stage</span>(<span class="t-string">'Provision Infrastructure'</span>) {
+            <span class="t-keyword">steps</span> {
+                <span class="t-cmd">sh</span> <span class="t-string">'terraform apply -auto-approve'</span>
+            }
+        }
+        <span class="t-keyword">stage</span>(<span class="t-string">'Deploy Web App'</span>) {
+            <span class="t-keyword">steps</span> {
+                <span class="t-cmd">sh</span> <span class="t-string">'ansible-playbook -i hosts playbook.yml'</span>
+            }
+        }
+    }
+}`
+        };
+
+        function switchTab(type) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('terminal-content').innerHTML = codeSnippets[type];
+        }
+
+        function scrollToDemo() {
+            document.getElementById('architecture-demo').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize default view
+        document.getElementById('terminal-content').innerHTML = codeSnippets.tf;
+    </script>
 </body>
 </html>
