@@ -1,0 +1,55 @@
+<svg width="680" height="260" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+<title>IaC and CI/CD pipeline flow</title>
+<desc>A developer pushes code to Git, which triggers Jenkins. Jenkins runs Terraform to provision a container standing in for a VM, then Ansible configures that container by installing NGINX and deploying the web page.</desc>
+
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<style>
+  .box { stroke-width: 1; }
+  .th { font-size: 14px; font-weight: 600; fill: #1a1a1a; }
+  .ts { font-size: 12px; fill: #555555; }
+  .arr { stroke: #333333; stroke-width: 1.5; fill: none; }
+  .gray   { fill: #f1efe8; stroke: #888780; }
+  .purple { fill: #e6def7; stroke: #8b6fce; }
+  .teal   { fill: #d7f0ec; stroke: #3fae9c; }
+  .coral  { fill: #fbe0da; stroke: #e2745a; }
+</style>
+
+<rect width="680" height="260" fill="#ffffff"/>
+
+<g>
+  <rect class="box gray" x="20" y="90" width="110" height="56" rx="8"/>
+  <text class="th" x="75" y="112" text-anchor="middle">You</text>
+  <text class="ts" x="75" y="130" text-anchor="middle">git push</text>
+</g>
+
+<g>
+  <rect class="box purple" x="164" y="90" width="120" height="56" rx="8"/>
+  <text class="th" x="224" y="112" text-anchor="middle">Jenkins</text>
+  <text class="ts" x="224" y="130" text-anchor="middle">Runs in Docker</text>
+</g>
+
+<g>
+  <rect class="box teal" x="318" y="90" width="150" height="56" rx="8"/>
+  <text class="th" x="393" y="112" text-anchor="middle">Terraform</text>
+  <text class="ts" x="393" y="130" text-anchor="middle">Provisions the container</text>
+</g>
+
+<g>
+  <rect class="box coral" x="502" y="90" width="120" height="56" rx="8"/>
+  <text class="th" x="562" y="112" text-anchor="middle">Ansible</text>
+  <text class="ts" x="562" y="130" text-anchor="middle">Configures it</text>
+</g>
+
+<line x1="130" y1="118" x2="162" y2="118" class="arr" marker-end="url(#arrow)"/>
+<line x1="284" y1="118" x2="316" y2="118" class="arr" marker-end="url(#arrow)"/>
+<line x1="468" y1="118" x2="500" y2="118" class="arr" marker-end="url(#arrow)"/>
+
+<path d="M562,146 L562,190 L75,190 L75,148" fill="none" class="arr" marker-end="url(#arrow)"/>
+<text class="ts" x="318" y="205" text-anchor="middle">installs NGINX, deploys the page — live web app</text>
+
+</svg>
