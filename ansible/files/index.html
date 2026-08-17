@@ -1,8 +1,763 @@
 <!DOCTYPE html>
-<html>
-<head><title>Deployed via IaC pipeline</title></head>
-<body style="font-family: sans-serif; text-align: center; margin-top: 80px;">
-  <h1>It works!</h1>
-  <p>Deployed automatically by Terraform + Ansible.</p>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Infrastructure as Code & CI/CD deployment project developed during an internship at METAL 2000.">
+
+    <title>METAL 2000 | Cloud & DevOps Infrastructure</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="container nav-container">
+
+        <a href="#" class="logo">
+            <span class="logo-mark">M</span>
+
+            <span class="logo-text">
+                METAL <strong>2000</strong>
+            </span>
+        </a>
+
+        <div class="nav-links">
+            <a href="#about">Entreprise</a>
+            <a href="#project">Projet</a>
+            <a href="#stack">Technologies</a>
+            <a href="#pipeline">Pipeline</a>
+        </div>
+
+        <a href="#project" class="nav-button">
+            Découvrir le projet
+            <span>↗</span>
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<header class="hero">
+
+    <div class="hero-grid"></div>
+
+    <div class="container hero-content">
+
+        <div class="hero-badge">
+            <span class="status-dot"></span>
+            PROJET DEVOPS · INTERNSHIP 2026
+        </div>
+
+        <h1>
+            Infrastructure
+            <span>automatisée.</span>
+        </h1>
+
+        <p class="hero-description">
+            Une infrastructure Cloud moderne conçue autour de
+            l'Infrastructure as Code et du CI/CD pour automatiser
+            le déploiement d'une application web.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="#pipeline" class="btn btn-primary">
+                Voir le pipeline
+                <span>→</span>
+            </a>
+
+            <a href="#project" class="btn btn-secondary">
+                Explorer le projet
+            </a>
+
+        </div>
+
+        <div class="hero-tech">
+
+            <div>
+                <span class="tech-icon">TF</span>
+                Terraform
+            </div>
+
+            <div>
+                <span class="tech-icon">AN</span>
+                Ansible
+            </div>
+
+            <div>
+                <span class="tech-icon">JK</span>
+                Jenkins
+            </div>
+
+            <div>
+                <span class="tech-icon">DK</span>
+                Docker
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-bottom">
+
+        <div class="container hero-bottom-content">
+
+            <span>METAL 2000</span>
+
+            <span class="scroll-line"></span>
+
+            <span>CLOUD ENGINEERING · DEVOPS</span>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= COMPANY ================= -->
+
+<section id="about" class="section company-section">
+
+    <div class="container">
+
+        <div class="section-label">
+            <span>01</span>
+            À PROPOS
+        </div>
+
+        <div class="company-grid">
+
+            <div>
+
+                <h2>
+                    L'expertise industrielle
+                    <br>
+                    rencontre le <span>Cloud.</span>
+                </h2>
+
+            </div>
+
+            <div>
+
+                <p class="large-text">
+                    METAL 2000 développe des solutions de fermeture
+                    pour les environnements résidentiels, commerciaux
+                    et industriels.
+                </p>
+
+                <p>
+                    Cette expérience industrielle s'appuie sur la
+                    fabrication, l'installation, la maintenance,
+                    le dépannage et la réparation de systèmes
+                    de fermeture.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Statistics -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <strong>30+</strong>
+
+                <span>Années d'expertise</span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <strong>2 800</strong>
+
+                <span>m² d'usine en Île-de-France</span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <strong>112</strong>
+
+                <span>Agences et représentations</span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <strong>24/7</strong>
+
+                <span>Service d'astreinte</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROJECT ================= -->
+
+<section id="project" class="section project-section">
+
+    <div class="container">
+
+        <div class="section-label">
+            <span>02</span>
+            PROJET
+        </div>
+
+        <div class="project-header">
+
+            <div>
+
+                <h2>
+                    Infrastructure as
+                    <span>Code.</span>
+                </h2>
+
+            </div>
+
+            <p>
+                L'objectif du projet est de transformer un processus
+                de déploiement manuel en une chaîne automatisée,
+                reproductible et versionnée.
+            </p>
+
+        </div>
+
+
+        <div class="project-card">
+
+            <div class="project-card-top">
+
+                <div class="terminal-dot"></div>
+                <div class="terminal-dot"></div>
+                <div class="terminal-dot"></div>
+
+                <span>deployment.sh</span>
+
+            </div>
+
+
+            <div class="terminal-content">
+
+                <div>
+                    <span class="terminal-number">01</span>
+                    <span class="terminal-command">
+                        terraform init
+                    </span>
+                </div>
+
+                <div>
+                    <span class="terminal-number">02</span>
+                    <span class="terminal-command">
+                        terraform apply
+                    </span>
+                </div>
+
+                <div>
+                    <span class="terminal-number">03</span>
+                    <span class="terminal-command">
+                        ansible-playbook playbook.yml
+                    </span>
+                </div>
+
+                <div>
+                    <span class="terminal-number">04</span>
+                    <span class="terminal-command success">
+                        ✓ deployment successful
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TECHNOLOGIES ================= -->
+
+<section id="stack" class="section stack-section">
+
+    <div class="container">
+
+        <div class="section-label">
+            <span>03</span>
+            TECHNOLOGIES
+        </div>
+
+        <h2>
+            Une chaîne technique
+            <span>complètement automatisée.</span>
+        </h2>
+
+
+        <div class="tech-grid">
+
+            <!-- Terraform -->
+
+            <article class="tech-card">
+
+                <div class="tech-card-number">
+                    01
+                </div>
+
+                <div class="big-icon terraform-icon">
+                    TF
+                </div>
+
+                <h3>Terraform</h3>
+
+                <p>
+                    Provisionnement de l'infrastructure
+                    sous forme de code.
+                </p>
+
+                <span class="tech-role">
+                    INFRASTRUCTURE
+                </span>
+
+            </article>
+
+
+            <!-- Ansible -->
+
+            <article class="tech-card">
+
+                <div class="tech-card-number">
+                    02
+                </div>
+
+                <div class="big-icon ansible-icon">
+                    AN
+                </div>
+
+                <h3>Ansible</h3>
+
+                <p>
+                    Configuration automatisée du serveur,
+                    installation de NGINX et déploiement.
+                </p>
+
+                <span class="tech-role">
+                    CONFIGURATION
+                </span>
+
+            </article>
+
+
+            <!-- Jenkins -->
+
+            <article class="tech-card">
+
+                <div class="tech-card-number">
+                    03
+                </div>
+
+                <div class="big-icon jenkins-icon">
+                    JK
+                </div>
+
+                <h3>Jenkins</h3>
+
+                <p>
+                    Orchestration du pipeline CI/CD
+                    déclenché par les changements Git.
+                </p>
+
+                <span class="tech-role">
+                    AUTOMATION
+                </span>
+
+            </article>
+
+
+            <!-- Docker -->
+
+            <article class="tech-card">
+
+                <div class="tech-card-number">
+                    04
+                </div>
+
+                <div class="big-icon docker-icon">
+                    DK
+                </div>
+
+                <h3>Docker</h3>
+
+                <p>
+                    Environnement conteneurisé utilisé
+                    comme cible de déploiement.
+                </p>
+
+                <span class="tech-role">
+                    CONTAINER
+                </span>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PIPELINE ================= -->
+
+<section id="pipeline" class="section pipeline-section">
+
+    <div class="container">
+
+        <div class="section-label">
+            <span>04</span>
+            CI/CD PIPELINE
+        </div>
+
+        <div class="pipeline-header">
+
+            <h2>
+                From <span>commit</span>
+                to deployment.
+            </h2>
+
+            <p>
+                Chaque modification du projet peut être
+                transformée automatiquement en déploiement.
+            </p>
+
+        </div>
+
+
+        <div class="pipeline">
+
+            <!-- GitHub -->
+
+            <div class="pipeline-step">
+
+                <div class="pipeline-icon">
+                    GIT
+                </div>
+
+                <div>
+                    <span class="pipeline-label">
+                        SOURCE
+                    </span>
+
+                    <h3>GitHub</h3>
+
+                    <p>
+                        Code versionné
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+
+            <!-- Jenkins -->
+
+            <div class="pipeline-step">
+
+                <div class="pipeline-icon">
+                    JK
+                </div>
+
+                <div>
+                    <span class="pipeline-label">
+                        CI/CD
+                    </span>
+
+                    <h3>Jenkins</h3>
+
+                    <p>
+                        Orchestration
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+
+            <!-- Terraform -->
+
+            <div class="pipeline-step">
+
+                <div class="pipeline-icon">
+                    TF
+                </div>
+
+                <div>
+                    <span class="pipeline-label">
+                        INFRA
+                    </span>
+
+                    <h3>Terraform</h3>
+
+                    <p>
+                        Provisionnement
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+
+            <!-- Ansible -->
+
+            <div class="pipeline-step">
+
+                <div class="pipeline-icon">
+                    AN
+                </div>
+
+                <div>
+                    <span class="pipeline-label">
+                        CONFIG
+                    </span>
+
+                    <h3>Ansible</h3>
+
+                    <p>
+                        Configuration
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+
+            <!-- NGINX -->
+
+            <div class="pipeline-step">
+
+                <div class="pipeline-icon">
+                    NG
+                </div>
+
+                <div>
+                    <span class="pipeline-label">
+                        DEPLOY
+                    </span>
+
+                    <h3>NGINX</h3>
+
+                    <p>
+                        Application live
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="pipeline-status">
+
+            <span class="status-pulse"></span>
+
+            PIPELINE STATUS
+
+            <strong>OPERATIONAL</strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= QUALITY ================= -->
+
+<section class="section quality-section">
+
+    <div class="container quality-grid">
+
+        <div>
+
+            <div class="section-label">
+                <span>05</span>
+                ENGINEERING
+            </div>
+
+            <h2>
+                Built for
+                <span>reliability.</span>
+            </h2>
+
+            <p>
+                L'approche IaC permet de rendre l'infrastructure
+                reproductible et de réduire les opérations manuelles.
+            </p>
+
+        </div>
+
+
+        <div class="quality-list">
+
+            <div class="quality-item">
+
+                <span>01</span>
+
+                <div>
+                    <h3>Reproductible</h3>
+                    <p>
+                        Une infrastructure décrite et versionnée
+                        dans le code.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quality-item">
+
+                <span>02</span>
+
+                <div>
+                    <h3>Automatisé</h3>
+                    <p>
+                        Le pipeline exécute automatiquement
+                        les différentes étapes.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quality-item">
+
+                <span>03</span>
+
+                <div>
+                    <h3>Traçable</h3>
+                    <p>
+                        Les changements sont suivis dans Git
+                        et exécutés par Jenkins.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quality-item">
+
+                <span>04</span>
+
+                <div>
+                    <h3>Scalable</h3>
+                    <p>
+                        L'approche peut évoluer vers des
+                        infrastructures Cloud plus importantes.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+
+                <div class="logo">
+                    <span class="logo-mark">M</span>
+
+                    <span class="logo-text">
+                        METAL <strong>2000</strong>
+                    </span>
+                </div>
+
+                <p>
+                    Cloud Engineering · Infrastructure · DevOps
+                </p>
+
+            </div>
+
+
+            <div class="footer-project">
+
+                <span>INTERNSHIP PROJECT</span>
+
+                <strong>
+                    Infrastructure as Code
+                    & CI/CD Automation
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 METAL 2000 · Internship Project
+            </span>
+
+            <span>
+                Terraform · Ansible · Jenkins · Docker · NGINX
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
 </body>
 </html>
