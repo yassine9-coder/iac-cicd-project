@@ -3,6 +3,9 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+echo "==> Cleaning up any previous environment"
+docker rm -f web-vm 2>/dev/null || true
+
 echo "==> Provisioning with Terraform"
 cd terraform
 terraform init -input=false

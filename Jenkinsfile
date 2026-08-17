@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Cleanup previous environment') {
+            steps {
+                sh 'docker rm -f web-vm || true'
+            }
+        }
         stage('Provision with Terraform') {
             steps {
                 dir('terraform') {
